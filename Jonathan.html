@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página personal de Jonathan">
+  <title>Jonathan | Página personal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: #f8fafc;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(56,189,248,.20), transparent 32%),
+        radial-gradient(circle at 85% 80%, rgba(129,140,248,.22), transparent 34%),
+        #080d1b;
+    }
+    .card {
+      width: min(100%, 760px);
+      padding: clamp(30px, 7vw, 64px);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 28px;
+      background: rgba(15,23,42,.78);
+      box-shadow: 0 24px 80px rgba(0,0,0,.38);
+      backdrop-filter: blur(14px);
+      animation: appear .8s ease both;
+    }
+    .avatar {
+      width: 112px; height: 112px; margin: 0 auto 25px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      font-size: 2.5rem; font-weight: 800;
+      color: #07111f;
+      background: linear-gradient(135deg, #67e8f9, #a5b4fc);
+      box-shadow: 0 0 45px rgba(103,232,249,.22);
+    }
+    .eyebrow {
+      color: #67e8f9; font-size: .78rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+    }
+    h1 { margin: 13px 0 15px; font-size: clamp(2.5rem, 8vw, 4.8rem); letter-spacing: -.055em; }
+    p { max-width: 510px; margin: 0 auto; color: #cbd5e1; line-height: 1.8; font-size: 1.05rem; }
+    .line { width: 58px; height: 4px; margin: 28px auto; border-radius: 9px; background: linear-gradient(90deg,#67e8f9,#a5b4fc); }
+    .tag { display: inline-block; padding: 10px 16px; border: 1px solid rgba(103,232,249,.3); border-radius: 999px; color: #a5f3fc; font-size: .9rem; }
+    footer { margin-top: 42px; color: #64748b; font-size: .8rem; }
+    @keyframes appear { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .card { animation: none; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="avatar" aria-label="Inicial J">J</div>
+    <div class="eyebrow">Bienvenido a mi página</div>
+    <h1>Jonathan</h1>
+    <p>¡Hola! Esta es mi página personal. Un espacio sencillo, moderno y creado especialmente para mí.</p>
+    <div class="line"></div>
+    <span class="tag">Página personal</span>
+    <footer>© <span id="year"></span> Jonathan. Todos los derechos reservados.</footer>
+  </main>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
