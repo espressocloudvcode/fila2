@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#191c17;--cream:#f3f0e8;--paper:#e9e5da;--olive:#68734d;--gold:#c5a66a;--muted:#77796f}
+    :root{--ink:#211c17;--cream:#f7f2e9;--paper:#eee5d7;--olive:#68734d;--gold:#bd8d4c;--muted:#777168}
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink)}
@@ -63,6 +63,23 @@
     .experience-copy{padding:90px 12%;display:flex;flex-direction:column;justify-content:center}
     .experience-copy h2{font-size:clamp(40px,5vw,65px);line-height:1.08;margin:20px 0}
     .experience-copy p{color:#696b61;line-height:2;font-size:13px;max-width:440px}
+    .services{padding:105px 8%;background:#f0e9dc}
+    .service-grid{max-width:1160px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .service-card{background:#fffaf2;text-align:center;padding:34px 22px 32px;border:1px solid #e4d9c7;transition:.3s}
+    .service-card:hover{transform:translateY(-6px);box-shadow:0 18px 35px #392c1715}
+    .service-icon{font-size:30px;color:#a77b40}
+    .service-card h3{font-size:24px;margin:16px 0 10px}
+    .service-card p{font-size:12px;line-height:1.8;color:#777168}
+    .delivery{position:relative;min-height:350px;display:flex;align-items:center;color:#fff;background:#211c17;overflow:hidden}
+    .delivery:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#171710e8,#17171070),url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1800&q=85') center/cover}
+    .delivery-content{position:relative;z-index:1;padding:70px 10%;max-width:760px}
+    .delivery h2{font-size:clamp(42px,5vw,66px);margin:15px 0}
+    .delivery p{color:#e2ded4;font-size:13px;line-height:1.9;max-width:520px}
+    .chef{display:grid;grid-template-columns:.9fr 1.1fr;gap:8%;align-items:center;padding:110px 12%;background:#f7f2e9}
+    .chef-photo{height:480px;overflow:hidden}
+    .chef-photo img{width:100%;height:100%;object-fit:cover}
+    .chef-copy h2{font-size:clamp(40px,4.5vw,60px);line-height:1.08;margin:17px 0 22px}
+    .chef-copy p{font-size:13px;color:#777168;line-height:2;margin-bottom:14px}
     .film{background:#e9e5da;padding:105px 8% 115px}
     .film-wrap{max-width:1120px;margin:auto}
     .film-heading{text-align:center;margin-bottom:38px}
@@ -100,6 +117,8 @@
     footer h4{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#d5bd8b;margin-bottom:17px}
     .copyright{border-top:1px solid #ffffff20;padding-top:20px;text-align:center;font-size:9px;letter-spacing:.12em;color:#777b70}
     @media(max-width:850px){
+      .service-grid{grid-template-columns:repeat(2,1fr)}.chef{grid-template-columns:1fr;padding:80px 8%}.chef-photo{height:390px;max-width:600px}
+
       header{padding:18px 5%}.menu-toggle{display:block}nav{display:none;position:absolute;top:100%;left:0;width:100%;padding:25px;background:#171b15;flex-direction:column;gap:22px}nav.open{display:flex}
       .hero{min-height:700px}.hero-content{margin-left:7%}.intro,.experience,.booking{grid-template-columns:1fr}.intro{padding:85px 8%;gap:55px}.intro-image{height:420px;max-width:600px}.experience-copy{padding:75px 9%}.experience-photo{min-height:400px}.booking{gap:45px}.dishes{grid-template-columns:repeat(2,1fr)}
     }
@@ -110,12 +129,12 @@
   </style>
 </head>
 <body>
-  <div class="topbar">Cocina peruana contemporánea · Lima, Perú</div>
+  <div class="topbar">Tradición, sazón y hospitalidad peruana · Lima, Perú</div>
   <header>
     <a class="logo" href="#inicio">SABORÉ<span>COCINA DE ORIGEN</span></a>
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
     <nav id="nav">
-      <a href="#historia">Nuestra esencia</a><a href="#carta">La carta</a><a href="#experiencia">Experiencia</a><a href="#video">Galería</a><a href="#locales">Locales</a><a class="reserve" href="#reservas">Reservar mesa</a>
+      <a href="#historia">Nosotros</a><a href="#carta">Nuestra carta</a><a href="#servicios">Servicios</a><a href="#video">Galería</a><a href="#locales">Locales</a><a class="reserve" href="#reservas">Reservaciones</a>
     </nav>
   </header>
 
@@ -148,14 +167,37 @@
         <p>Una carta inspirada en ingredientes peruanos, técnicas actuales y combinaciones pensadas para disfrutar sin prisa.</p>
       </div>
       <div class="dishes">
-        <article class="dish"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=850&q=85" alt="Ensalada fresca de temporada"><div class="dish-info"><small>Entrada · Fresco</small><h3>Huerta viva</h3><p>Vegetales de estación, cremoso de palta y vinagreta de hierbas andinas.</p><span class="price">S/ 32</span></div></article>
-        <article class="dish"><img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=850&q=85" alt="Pescado preparado al estilo contemporáneo"><div class="dish-info"><small>Mar · Especialidad</small><h3>Pesca del día</h3><p>Pescado fresco, ají amarillo suave y toques cítricos de la costa.</p><span class="price">S/ 58</span></div></article>
-        <article class="dish"><img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=850&q=85" alt="Plato de pasta artesanal"><div class="dish-info"><small>Fondo · De la casa</small><h3>Sabores criollos</h3><p>Una interpretación actual de los sabores clásicos de nuestra cocina.</p><span class="price">S/ 49</span></div></article>
-        <article class="dish"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=850&q=85" alt="Preparación colorida con ingredientes frescos"><div class="dish-info"><small>Para compartir</small><h3>Encuentro peruano</h3><p>Selección de bocados de temporada con salsas hechas en casa.</p><span class="price">S/ 45</span></div></article>
-        <article class="dish"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=850&q=85" alt="Postre cremoso con fruta"><div class="dish-info"><small>Postre · Dulce final</small><h3>Dulce recuerdo</h3><p>Texturas cremosas, fruta de estación y notas de chocolate peruano.</p><span class="price">S/ 26</span></div></article>
-        <article class="dish"><img src="https://images.unsplash.com/photo-1513558161293-cadb2da46099?auto=format&fit=crop&w=850&q=85" alt="Bebida refrescante con cítricos"><div class="dish-info"><small>Bebida · Sin alcohol</small><h3>Brisa de los Andes</h3><p>Frutas naturales, hierbas aromáticas y un toque de cítricos.</p><span class="price">S/ 18</span></div></article>
+        <article class="dish"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=850&q=85" alt="Ensalada fresca de temporada"><div class="dish-info"><small>Tradición marina</small><h3>Ceviche clásico</h3><p>Pescado fresco, limón, ají, cebolla roja, camote y choclo.</p><span class="price">Plato de la casa</span></div></article>
+        <article class="dish"><img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=850&q=85" alt="Pescado preparado al estilo contemporáneo"><div class="dish-info"><small>Especialidad norteña</small><h3>Arroz con pato</h3><p>Arroz verde aromático, pato tierno y el toque tradicional de nuestra cocina.</p><span class="price">Plato de la casa</span></div></article>
+        <article class="dish"><img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=850&q=85" alt="Plato de pasta artesanal"><div class="dish-info"><small>Clásico peruano</small><h3>Lomo saltado</h3><p>Lomo salteado al wok con cebolla, tomate, papas doradas y arroz.</p><span class="price">Plato de la casa</span></div></article>
+        <article class="dish"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=850&q=85" alt="Preparación colorida con ingredientes frescos"><div class="dish-info"><small>Sabor criollo</small><h3>Anticuchos</h3><p>Brochetas tradicionales acompañadas de papa dorada y salsas de la casa.</p><span class="price">Para compartir</span></div></article>
+        <article class="dish"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=850&q=85" alt="Postre cremoso con fruta"><div class="dish-info"><small>Receta tradicional</small><h3>Suspiro limeño</h3><p>Un postre clásico, suave y dulce, con el sabor de siempre.</p><span class="price">Dulce de la casa</span></div></article>
+        <article class="dish"><img src="https://images.unsplash.com/photo-1513558161293-cadb2da46099?auto=format&fit=crop&w=850&q=85" alt="Bebida refrescante con cítricos"><div class="dish-info"><small>Refrescante</small><h3>Chicha morada</h3><p>Bebida tradicional de maíz morado, frutas y especias.</p><span class="price">Hecha en casa</span></div></article>
       </div>
       <div style="text-align:center;margin-top:48px"><a class="btn" href="#reservas">Ven a probarlos</a></div>
+    </section>
+
+    <section class="services" id="servicios">
+      <div class="section-head">
+        <div class="eyebrow">Pensamos en cada ocasión</div>
+        <h2>Tenemos algo para ti</h2>
+        <p>Disfruta SABORÉ como más te guste: una comida en familia, una celebración o una experiencia especial.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card"><div class="service-icon">✦</div><h3>Eventos especiales</h3><p>Comparte cumpleaños, reuniones y momentos importantes alrededor de nuestra mesa.</p></article>
+        <article class="service-card"><div class="service-icon">❖</div><h3>Catering</h3><p>Llevamos nuestra propuesta gastronómica a tus reuniones y celebraciones.</p></article>
+        <article class="service-card"><div class="service-icon">◈</div><h3>Buffet privado</h3><p>Una alternativa para disfrutar distintos sabores en ocasiones especiales.</p></article>
+        <article class="service-card"><div class="service-icon">⌂</div><h3>Atención familiar</h3><p>Un ambiente acogedor para compartir con quienes más quieres.</p></article>
+      </div>
+    </section>
+
+    <section class="delivery">
+      <div class="delivery-content">
+        <div class="eyebrow">SABORÉ en tu mesa</div>
+        <h2>Tu antojo peruano, donde estés.</h2>
+        <p>Disfruta de nuestros sabores en casa o en el trabajo. Contáctanos para consultar las opciones de atención y pedidos.</p>
+        <div class="actions"><a class="btn primary" href="#reservas">Consultar pedido</a></div>
+      </div>
     </section>
 
     <section class="experience" id="experiencia">
@@ -165,6 +207,17 @@
         <h2>Un lugar para encontrarnos.</h2>
         <p>Una mesa compartida siempre tiene algo especial. Creamos un ambiente cálido y contemporáneo para celebrar, conversar y descubrir nuevos sabores.</p>
         <a class="text-link" href="#reservas">Planea tu visita&nbsp; ↗</a>
+      </div>
+    </section>
+
+    <section class="chef">
+      <div class="chef-photo"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1100&q=85" alt="Chef trabajando en la cocina de un restaurante"></div>
+      <div class="chef-copy">
+        <div class="eyebrow">El corazón de nuestra cocina</div>
+        <h2>Pasión que se siente en cada plato.</h2>
+        <p>Detrás de cada preparación hay un equipo que cuida los ingredientes, respeta las recetas y disfruta compartir la gastronomía peruana.</p>
+        <p>Nuestra cocina se inspira en los sabores de la costa, sierra y selva, con el propósito de ofrecer una experiencia cálida y llena de identidad.</p>
+        <a class="text-link" href="#carta">Descubre nuestros platos ↗</a>
       </div>
     </section>
 
@@ -192,7 +245,7 @@
 
     <section class="locations" id="locales">
       <div class="section-head">
-        <div class="eyebrow">Estamos cerca de ti</div><h2>Visítanos en Lima</h2>
+        <div class="eyebrow">Nuestras casas</div><h2>Ven a compartir con nosotros</h2>
         <p>Encuentra tu mesa y déjate llevar por una experiencia llena de sabor.</p>
       </div>
       <div class="location-grid">
