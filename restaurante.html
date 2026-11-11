@@ -35,7 +35,12 @@ h2{font:300 clamp(45px,6vw,76px)/.95 'Cormorant Garamond',serif;margin:20px 0 25
 .gallery{display:grid;grid-template-columns:1.2fr 1fr 1fr;height:360px;overflow:hidden}.gallery img{width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:.7s}.gallery img:hover{filter:brightness(1);transform:scale(1.04)}
 .contact{padding:100px 8%;text-align:center;background:#201d18}.contact h2{margin:15px 0}.contact p{font-size:12px;line-height:2;color:#bdb6aa}.contact .reserve{display:inline-block;margin-top:20px}
 footer{padding:35px 8%;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ffffff20;color:#a9a196;font-size:9px;letter-spacing:2px;text-transform:uppercase}
-.reveal{opacity:0;transform:translateY(35px);transition:opacity 1s,transform 1s}.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transform:translate3d(0,42px,0);filter:blur(5px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1),filter .9s ease}.reveal.visible{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+.dish{transition:opacity .45s ease,transform .65s cubic-bezier(.2,.7,.2,1)}.dish.visible{transition-delay:var(--delay,0ms)}
+.dish-image{position:relative}.dish-image:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#ffffff12,transparent 45%,#00000018);pointer-events:none}
+.intro-photo img,.gallery img{will-change:transform}.hero-content>*{animation:riseIn 1s both}.hero-content .overline{animation-delay:.15s}.hero-content h1{animation-delay:.3s}.hero-content p{animation-delay:.48s}.hero-content .hero-link{animation-delay:.65s}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(max-width:800px){header{padding:0 5%;height:72px}nav{gap:14px}nav a{font-size:8px}.reserve{padding:10px;font-size:8px}.intro{grid-template-columns:1fr;padding:85px 7%;gap:35px}.intro-photo{height:380px}.dishes{grid-template-columns:repeat(2,1fr)}.dish-image{height:260px}.story{grid-template-columns:1fr}.story-image{min-height:400px}.story-copy{padding:75px 8%}.gallery{height:250px}}
 @media(max-width:520px){header{height:65px}.brand{font-size:22px}nav{display:none}.hero{min-height:620px}.hero-bg{background-position:58% center}.dishes{grid-template-columns:1fr;gap:30px}.dish-image{height:300px}.menu{padding:85px 7%}.menu-tabs{gap:17px;margin:35px 0}.gallery{grid-template-columns:1fr 1fr;height:190px}.gallery img:last-child{display:none}footer{flex-direction:column;gap:15px;text-align:center}}
 </style>
@@ -61,10 +66,45 @@ footer{padding:35px 8%;display:flex;align-items:center;justify-content:space-bet
 </main>
 <footer><span class="brand">MAISON</span><span>Una experiencia para recordar</span><span>© 2026 Maison Restaurant</span></footer>
 <script>
+/* Imágenes con respaldo automático: si un servidor falla, se prueba otra fotografía. */
+const imageBackups = [
+ 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
+ 'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200',
+ 'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1200',
+ 'https://images.pexels.com/photos/料理/pexels-photo-料理.jpeg'
+];
+document.querySelectorAll('img').forEach((img,index)=>{
+ img.loading = index < 2 ? 'eager' : 'lazy';
+ img.decoding = 'async';
+ img.dataset.original = img.src;
+ img.addEventListener('error',()=>{
+   if(img.dataset.backupTried) return;
+   img.dataset.backupTried='1';
+   const fallbacks=[
+    'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    'https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    'https://images.pexels.com/photos/ desserts/pexels-photo-desserts.jpeg'
+   ];
+   img.src=fallbacks[index % 4];
+ });
+});
 const tabs=document.querySelectorAll('.tab'),dishes=document.querySelectorAll('.dish');
 tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');dishes.forEach(d=>d.style.display=t.dataset.filter==='all'||d.dataset.type===t.dataset.filter?'':'none')}));
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-window.addEventListener('scroll',()=>{const bg=document.querySelector('.hero-bg');if(window.scrollY<window.innerHeight)bg.style.backgroundPosition='center '+(window.scrollY*.22)+'px'});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+document.querySelectorAll('.reveal').forEach((el,i)=>{if(el.classList.contains('dish'))el.style.setProperty('--delay',(i%3)*110+'ms');observer.observe(el)});
+let ticking=false;
+window.addEventListener('scroll',()=>{
+ if(ticking)return;ticking=true;
+ requestAnimationFrame(()=>{
+  const y=window.scrollY,bg=document.querySelector('.hero-bg');
+  if(y<window.innerHeight)bg.style.transform='translate3d(0,'+(y*.16)+'px,0) scale(1.05)';
+  document.querySelectorAll('.intro-photo img,.gallery img').forEach((img,i)=>{
+   const r=img.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)img.style.transform='translate3d(0,'+((r.top-innerHeight/2)*-.025)+'px,0) scale(1.04)';
+  });
+  ticking=false;
+ });
+},{passive:true});
 </script>
 </body></html>
