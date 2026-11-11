@@ -63,6 +63,17 @@
     .experience-copy{padding:90px 12%;display:flex;flex-direction:column;justify-content:center}
     .experience-copy h2{font-size:clamp(40px,5vw,65px);line-height:1.08;margin:20px 0}
     .experience-copy p{color:#696b61;line-height:2;font-size:13px;max-width:440px}
+    .film{background:#e9e5da;padding:105px 8% 115px}
+    .film-wrap{max-width:1120px;margin:auto}
+    .film-heading{text-align:center;margin-bottom:38px}
+    .film-heading h2{font-size:clamp(40px,5vw,62px);margin:15px 0}
+    .film-heading p{font-size:13px;line-height:1.9;color:#696b61;max-width:560px;margin:auto}
+    .film-frame{position:relative;background:#171a15;aspect-ratio:16/9;overflow:hidden;box-shadow:0 25px 65px #191c1726}
+    .film-frame video{width:100%;height:100%;display:block;object-fit:cover}
+    .film-caption{display:flex;justify-content:space-between;gap:20px;margin-top:17px;color:#77796f;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+    .photo-strip{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px;margin-top:55px}
+    .photo-strip img{width:100%;height:210px;object-fit:cover;display:block}
+    .photo-strip img:first-child{height:250px}
     .locations{padding:115px 8%;background:#f7f5ef}
     .location-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1100px;margin:auto}
     .location{position:relative;min-height:350px;overflow:hidden;color:white}
@@ -104,7 +115,7 @@
     <a class="logo" href="#inicio">SABORÉ<span>COCINA DE ORIGEN</span></a>
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
     <nav id="nav">
-      <a href="#historia">Nuestra esencia</a><a href="#carta">La carta</a><a href="#experiencia">Experiencia</a><a href="#locales">Locales</a><a class="reserve" href="#reservas">Reservar mesa</a>
+      <a href="#historia">Nuestra esencia</a><a href="#carta">La carta</a><a href="#experiencia">Experiencia</a><a href="#video">Galería</a><a href="#locales">Locales</a><a class="reserve" href="#reservas">Reservar mesa</a>
     </nav>
   </header>
 
@@ -154,6 +165,28 @@
         <h2>Un lugar para encontrarnos.</h2>
         <p>Una mesa compartida siempre tiene algo especial. Creamos un ambiente cálido y contemporáneo para celebrar, conversar y descubrir nuevos sabores.</p>
         <a class="text-link" href="#reservas">Planea tu visita&nbsp; ↗</a>
+      </div>
+    </section>
+
+    <section class="film" id="video">
+      <div class="film-wrap">
+        <div class="film-heading">
+          <div class="eyebrow">Una mirada a nuestra cocina</div>
+          <h2>El sabor también se vive.</h2>
+          <p>Descubre el cuidado, la pasión y los pequeños detalles que convierten cada plato en una experiencia.</p>
+        </div>
+        <div class="film-frame">
+          <video controls playsinline preload="metadata" poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=85">
+            <source src="https://videos.pexels.com/video-files/1858094/1858094-hd_1920_1080_25fps.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <div class="film-caption"><span>SABORÉ · Cocina de origen</span><span>Ingredientes · Técnica · Pasión</span></div>
+        <div class="photo-strip">
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85" alt="Plato colorido de cocina contemporánea">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=85" alt="Ambiente cálido de restaurante">
+          <img src="https://images.unsplash.com/photo-1515003197210-e0cd7184f8b5?auto=format&fit=crop&w=800&q=85" alt="Preparación gastronómica de autor">
+        </div>
       </div>
     </section>
 
