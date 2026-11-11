@@ -130,7 +130,7 @@ tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remo
 /* Las siete secciones principales se revelan con una entrada 3D al hacer scroll. */
 const mainSections=[...document.querySelectorAll('main > .hero,main > .intro,main > .menu,main > .burger-feature,main > .story,main > .gallery-section,main > .contact')];
 const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
- if(entry.isIntersecting){entry.target.classList.add('is-inview');sectionObserver.unobserve(entry.target)}
+ entry.target.classList.toggle('is-inview',entry.isIntersecting);
 }),{threshold:.08,rootMargin:'0px 0px -8% 0px'});
 mainSections.forEach(section=>{section.classList.add('scroll-section');sectionObserver.observe(section)});
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
