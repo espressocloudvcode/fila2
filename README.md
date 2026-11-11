@@ -1,1 +1,1 @@
-<img width="386" height="480" alt="PenguinVibeGIF" src="https://github.com/user-attachments/assets/a393f8ae-7916-4af2-8f49-0985f046c1b9" />
+<img width="480" height="416" alt="CatGIF" src="https://github.com/user-attachments/assets/de1c833e-0889-4fc0-9c29-bef16c97e5e1" />
