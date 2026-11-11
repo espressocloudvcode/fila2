@@ -66,13 +66,6 @@ footer{padding:35px 8%;display:flex;align-items:center;justify-content:space-bet
 </main>
 <footer><span class="brand">MAISON</span><span>Una experiencia para recordar</span><span>© 2026 Maison Restaurant</span></footer>
 <script>
-/* Imágenes con respaldo automático: si un servidor falla, se prueba otra fotografía. */
-const imageBackups = [
- 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200',
- 'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200',
- 'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1200',
- 'https://images.pexels.com/photos/料理/pexels-photo-料理.jpeg'
-];
 document.querySelectorAll('img').forEach((img,index)=>{
  img.loading = index < 2 ? 'eager' : 'lazy';
  img.decoding = 'async';
