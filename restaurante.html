@@ -38,12 +38,49 @@ footer{padding:35px 8%;display:flex;align-items:center;justify-content:space-bet
 .reveal{opacity:0;transform:translateY(35px);transition:opacity 1s,transform 1s}.reveal.visible{opacity:1;transform:translateY(0)}
 @media(max-width:800px){header{padding:0 5%;height:72px}nav{gap:14px}nav a{font-size:8px}.reserve{padding:10px;font-size:8px}.intro{grid-template-columns:1fr;padding:85px 7%;gap:35px}.intro-photo{height:380px}.dishes{grid-template-columns:repeat(2,1fr)}.dish-image{height:260px}.story{grid-template-columns:1fr}.story-image{min-height:400px}.story-copy{padding:75px 8%}.gallery{height:250px}}
 @media(max-width:520px){header{height:65px}.brand{font-size:22px}nav{display:none}.hero{min-height:620px}.hero-bg{background-position:58% center}.dishes{grid-template-columns:1fr;gap:30px}.dish-image{height:300px}.menu{padding:85px 7%}.menu-tabs{gap:17px;margin:35px 0}.gallery{grid-template-columns:1fr 1fr;height:190px}.gallery img:last-child{display:none}footer{flex-direction:column;gap:15px;text-align:center}}
+
+/* 3D SCROLLYTELLING */
+.experience{position:relative;height:390vh;background:radial-gradient(ellipse at 70% 48%,#30271d 0%,#171512 43%,#10100e 100%);overflow:clip}
+.experience-sticky{height:100svh;min-height:620px;position:sticky;top:0;display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;padding:7% 9%;overflow:hidden}
+.experience-copy{position:relative;z-index:2;max-width:410px}.experience-copy h2{font-size:clamp(54px,7vw,92px)}.experience-copy p{font-size:13px;line-height:2;color:#bdb6aa;max-width:340px}
+.experience-step{display:inline-block;margin-top:35px;color:var(--gold);font-size:9px;letter-spacing:3px;text-transform:uppercase;border-top:1px solid #8d7658;padding-top:13px}
+.three-wrap{height:min(72vh,680px);position:relative;display:grid;place-items:center;perspective:1100px}
+#foodCanvas{width:100%;height:100%;display:block;position:relative;z-index:1}
+.scene-glow{position:absolute;width:60%;aspect-ratio:1;border-radius:50%;background:#b98d5530;filter:blur(65px)}
+.scene-caption{position:absolute;bottom:7%;right:5%;font-size:9px;letter-spacing:4px;color:#b8a184}
+.scroll-hint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:3px;color:#b5a58d}
+.experience-track{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-around;align-items:flex-end;padding-right:3%;opacity:.12}
+.experience-marker{font:300 12vw 'Cormorant Garamond';color:#e8d5b8}
+@media(max-width:760px){.experience{height:300vh}.experience-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding:100px 7% 45px;align-content:center}.experience-copy{max-width:100%}.experience-copy h2{font-size:54px;margin:12px 0}.experience-copy p{max-width:100%;font-size:11px}.experience-step{margin-top:12px}.three-wrap{height:42vh;min-height:260px}.scene-caption{bottom:0}.experience-track{padding-right:1%}}
+@media(prefers-reduced-motion:reduce){.experience{height:auto}.experience-sticky{position:relative}}
+
 </style>
 </head>
 <body>
 <header><a class="brand" href="#home">MAISON<small>RESTAURANT · PARIS</small></a><nav><a href="#home">Accueil</a><a href="#histoire">Notre maison</a><a href="#menu">La carte</a><a href="#contact">Contact</a></nav><a class="reserve" href="#contact">Réserver une table</a></header>
 <main>
 <section class="hero" id="home"><div class="hero-bg"><img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=2200" alt="" fetchpriority="high"></div><div class="hero-content"><div class="overline">Cuisine française contemporaine</div><h1>L'art de<br><i>recevoir.</i></h1><p>Una experiencia gastronómica donde cada detalle cuenta.<br>Sabores honestos, momentos inolvidables.</p><a class="hero-link" href="#menu">Descubrir la carta &nbsp; ↘</a></div><div class="scroll">Scroll para descubrir</div></section>
+
+<section class="experience" id="experiencia">
+  <div class="experience-sticky">
+    <div class="experience-copy">
+      <span class="kicker">Una experiencia sensorial</span>
+      <h2>La cocina<br>en <i>movimiento.</i></h2>
+      <p>Desliza y descubre cómo cada ingrediente se convierte en una experiencia. Una mirada diferente al arte de nuestra cocina.</p>
+      <span class="experience-step" id="experienceStep">01 / 04 — El origen</span>
+    </div>
+    <div class="three-wrap">
+      <canvas id="foodCanvas" aria-label="Plato gastronómico animado en tres dimensiones"></canvas>
+      <div class="scene-glow"></div>
+      <div class="scene-caption">MAISON · SIGNATURE DISH</div>
+    </div>
+    <div class="scroll-hint">CONTINÚA DESLIZANDO ↓</div>
+  </div>
+  <div class="experience-track" aria-hidden="true">
+    <div class="experience-marker">01</div><div class="experience-marker">02</div><div class="experience-marker">03</div><div class="experience-marker">04</div>
+  </div>
+</section>
+
 <section class="intro" id="histoire"><div class="reveal"><div class="kicker">Nuestra filosofía</div><h2>El placer de<br>compartir <i>la mesa.</i></h2><p>Creemos en la belleza de lo sencillo: productos de temporada, técnicas cuidadas y una cocina que despierta emociones. Cada plato cuenta una historia y cada visita se convierte en un recuerdo.</p><div class="signature">La maison, votre maison.</div></div><div class="intro-photo reveal"><img loading="lazy" decoding="async" data-fallback="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1400" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85" alt="Mesa elegante de restaurante"><div class="photo-caption">Una mesa. Mil historias.</div></div></section>
 <section class="menu" id="menu"><div class="kicker">Una selección de temporada</div><h2>La <i>carte.</i></h2><div class="sub">Nuestra cocina · Ingredientes frescos · Preparación artesanal</div>
 <div class="menu-tabs"><button class="tab active" data-filter="all">Todo</button><button class="tab" data-filter="entradas">Entradas</button><button class="tab" data-filter="principales">Principales</button><button class="tab" data-filter="postres">Postres</button><button class="tab" data-filter="bebidas">Bebidas</button></div>
@@ -68,4 +105,80 @@ const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isInte
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 window.addEventListener('scroll',()=>{const bg=document.querySelector('.hero-bg');if(window.scrollY<window.innerHeight)bg.style.backgroundPosition='center '+(window.scrollY*.22)+'px'});
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<script type="module">
+const canvas=document.getElementById('foodCanvas');
+const stepLabel=document.getElementById('experienceStep');
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let scene,camera,renderer,plate,food,ring,threeReady=false;
+const steps=['01 / 04 — El origen','02 / 04 — La preparación','03 / 04 — El equilibrio','04 / 04 — La experiencia'];
+function updateProgress(){
+  const section=document.querySelector('.experience'),rect=section.getBoundingClientRect();
+  const range=section.offsetHeight-innerHeight;
+  const progress=Math.max(0,Math.min(1,-rect.top/(range||1)));
+  const stage=Math.min(3,Math.floor(progress*4));
+  stepLabel.textContent=steps[stage];
+  if(threeReady){
+    plate.rotation.y=progress*Math.PI*2.2;
+    plate.rotation.x=.15+Math.sin(progress*Math.PI*2)*.18;
+    plate.rotation.z=Math.sin(progress*Math.PI*3)*.12;
+    food.rotation.y=-progress*Math.PI*1.4;
+    food.position.y=Math.sin(progress*Math.PI*4)*.13;
+    food.scale.setScalar(1+Math.sin(progress*Math.PI)*.08);
+    ring.rotation.z=progress*Math.PI*2;
+    camera.position.z=6.4-progress*.9;
+    camera.position.y=.2+Math.sin(progress*Math.PI)*.35;
+    renderer.render(scene,camera);
+  }
+}
+try{
+  const THREE=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(38,1,.1,100);
+  camera.position.set(0,.25,6.4);
+  renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  scene.add(new THREE.HemisphereLight(0xffe6c2,0x24170e,2.1));
+  const key=new THREE.DirectionalLight(0xffd9a0,3.5);key.position.set(3,5,5);scene.add(key);
+  const fill=new THREE.PointLight(0xc78b50,22,12);fill.position.set(-3,1,2);scene.add(fill);
+  plate=new THREE.Group();scene.add(plate);
+  const ceramic=new THREE.Mesh(new THREE.CylinderGeometry(2.05,1.95,.18,96),new THREE.MeshStandardMaterial({color:0xe9e0d0,roughness:.24,metalness:.08}));
+  ceramic.position.y=-.45;plate.add(ceramic);
+  const rim=new THREE.Mesh(new THREE.TorusGeometry(1.93,.035,12,100),new THREE.MeshStandardMaterial({color:0xb99a6c,metalness:.65,roughness:.25}));
+  rim.rotation.x=Math.PI/2;rim.position.y=-.34;plate.add(rim);
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(.72,.82,.12,64),new THREE.MeshStandardMaterial({color:0xd6c6ad,roughness:.3}));
+  base.position.y=-.29;plate.add(base);
+  food=new THREE.Group();plate.add(food);
+  const sauce=new THREE.Mesh(new THREE.TorusGeometry(1.05,.12,16,90),new THREE.MeshStandardMaterial({color:0x9b4d26,roughness:.35}));
+  sauce.rotation.x=Math.PI/2;sauce.position.y=-.23;food.add(sauce);
+  for(let i=0;i<7;i++){
+    const angle=i*Math.PI*2/7;
+    const piece=new THREE.Mesh(new THREE.SphereGeometry(.28,28,20),new THREE.MeshStandardMaterial({color:[0xb66b36,0x66804a,0xe1bd79][i%3],roughness:.42}));
+    piece.scale.set(1.2,.42,.75);piece.position.set(Math.cos(angle)*.72,-.04,Math.sin(angle)*.72);piece.rotation.y=angle;food.add(piece);
+  }
+  const herb=new THREE.Mesh(new THREE.SphereGeometry(.18,20,16),new THREE.MeshStandardMaterial({color:0x6f8c4d,roughness:.6}));
+  herb.position.set(0,.12,0);herb.scale.set(1,.3,1);food.add(herb);
+  ring=new THREE.Mesh(new THREE.TorusGeometry(2.35,.012,8,120),new THREE.MeshBasicMaterial({color:0xc5a477,transparent:true,opacity:.6}));
+  ring.rotation.x=Math.PI/2;ring.position.y=-.4;plate.add(ring);
+  threeReady=true;updateProgress();
+}catch(err){
+  canvas.style.background='radial-gradient(ellipse,#59432b 0%,#171512 65%)';
+  canvas.insertAdjacentHTML('afterend','<div class="scene-caption">COCINA DE AUTOR · MAISON</div>');
+}
+function resize(){if(!renderer)return;const w=canvas.clientWidth,h=canvas.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);updateProgress()}
+window.addEventListener('scroll',updateProgress,{passive:true});window.addEventListener('resize',resize);
+if(!reduced){
+  try{
+    if(window.gsap&&window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);gsap.to('.experience-copy',{y:-35,opacity:.65,ease:'none',scrollTrigger:{trigger:'.experience',start:'top top',end:'bottom bottom',scrub:true}});}
+    if(window.Lenis){const lenis=new Lenis({duration:1.15,smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf);if(window.gsap&&window.ScrollTrigger){lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}}
+  }catch(e){}
+}
+</script>
+
 </body></html>
