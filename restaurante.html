@@ -41,6 +41,31 @@ footer{padding:35px 8%;display:flex;align-items:center;justify-content:space-bet
 .intro-photo img,.gallery img{will-change:transform}.hero-content>*{animation:riseIn 1s both}.hero-content .overline{animation-delay:.15s}.hero-content h1{animation-delay:.3s}.hero-content p{animation-delay:.48s}.hero-content .hero-link{animation-delay:.65s}
 @keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Scroll 3D: cada una de las siete secciones entra con profundidad */
+.scroll-section{
+ opacity:.12;
+ transform:perspective(1400px) rotateX(7deg) translate3d(0,85px,-90px) scale(.94);
+ transform-origin:50% 45%;
+ transform-style:preserve-3d;
+ filter:blur(8px);
+ transition:opacity 1s ease,transform 1.15s cubic-bezier(.16,.72,.2,1),filter 1s ease;
+ will-change:opacity,transform,filter;
+}
+.scroll-section.is-inview{
+ opacity:1;
+ transform:perspective(1400px) rotateX(0) translate3d(0,0,0) scale(1);
+ filter:blur(0);
+}
+.hero.scroll-section{opacity:1;filter:none;transform:none}
+@media(max-width:800px){
+ .scroll-section{transform:perspective(1000px) rotateX(4deg) translate3d(0,55px,-35px) scale(.97)}
+ .scroll-section.is-inview{transform:perspective(1000px) rotateX(0) translate3d(0,0,0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .scroll-section,.scroll-section.is-inview{opacity:1;transform:none;filter:none;transition:none;will-change:auto}
+}
+
 @media(max-width:800px){header{padding:0 5%;height:72px}nav{gap:14px}nav a{font-size:8px}.reserve{padding:10px;font-size:8px}.intro{grid-template-columns:1fr;padding:85px 7%;gap:35px}.intro-photo{height:380px}.dishes{grid-template-columns:repeat(2,1fr)}.dish-image{height:260px}.burger-feature{padding:85px 7%}.burger-grid{grid-template-columns:1fr}.burger-card{min-height:390px}.burger-copy{left:22px;right:22px;bottom:22px}.story{grid-template-columns:1fr}.story-image{min-height:400px}.story-copy{padding:75px 8%}.carousel-slide{height:58vw;min-height:280px}.carousel-arrow{width:40px;height:40px}.carousel-arrow.prev{left:10px}.carousel-arrow.next{right:10px}.gallery-section{padding:75px 5%}}
 @media(max-width:520px){header{height:65px}.brand{font-size:22px}nav{display:none}.hero{min-height:620px}.hero-bg{background-position:58% center}.dishes{grid-template-columns:1fr;gap:30px}.dish-image{height:300px}.menu{padding:85px 7%}.menu-tabs{gap:17px;margin:35px 0}.carousel-slide{height:78vw;min-height:280px}.carousel-caption h3{max-width:260px}.carousel-bottom{margin-top:15px}.carousel-arrow{width:36px;height:36px}footer{flex-direction:column;gap:15px;text-align:center}}
 </style>
@@ -102,6 +127,12 @@ const tabs=document.querySelectorAll('.tab'),dishes=document.querySelectorAll('.
  show(0);start();
 })();
 tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');dishes.forEach(d=>d.style.display=t.dataset.filter==='all'||d.dataset.type===t.dataset.filter?'':'none')}));
+/* Las siete secciones principales se revelan con una entrada 3D al hacer scroll. */
+const mainSections=[...document.querySelectorAll('main > .hero,main > .intro,main > .menu,main > .burger-feature,main > .story,main > .gallery-section,main > .contact')];
+const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(entry.isIntersecting){entry.target.classList.add('is-inview');sectionObserver.unobserve(entry.target)}
+}),{threshold:.08,rootMargin:'0px 0px -8% 0px'});
+mainSections.forEach(section=>{section.classList.add('scroll-section');sectionObserver.observe(section)});
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
 document.querySelectorAll('.reveal').forEach((el,i)=>{if(el.classList.contains('dish'))el.style.setProperty('--delay',(i%3)*110+'ms');observer.observe(el)});
 let ticking=false;
